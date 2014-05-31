@@ -29,7 +29,7 @@
           shell=/bin/bash 
           groups=sudo
 
-  # install go
+  # go
   - name: download go
     get_url: url={{ go_download_location }}
              dest=/usr/local/src/{{ go_tarball }}
@@ -47,14 +47,14 @@
     copy: content="export PATH=$PATH:/usr/local/go/bin"
           dest=/etc/profile.d/go-bin.sh
 
-  # create our hero's go path
+  # go path
   - name: create /home/{{ hero }}/go
     file: dest=/home/{{ hero }}/go
           state=directory
           owner={{ hero }}
           group={{ hero }}
 
-  # install godep
+  # godep
   - name: install godep
     shell: go get github.com/tools/godep
            creates=/home/{{ hero }}/go/bin/godep
@@ -64,7 +64,7 @@
     sudo: yes
     sudo_user: "{{ hero }}"
 
-  # install golint
+  # golint
   - name: install golint
     shell: go get github.com/golang/lint/golint
            creates=/home/{{ hero }}/go/bin/golint
@@ -74,12 +74,12 @@
     sudo: yes
     sudo_user: "{{ hero }}"
 
-  # a .profile
+  # .profile
   - name: create /home/{{ hero }}/.profile
     template: dest=/home/{{ hero }}/.profile
               src=files/home/hero/.profile
 
-  # drop in his gitconfig
+  # .gitconfig
   - name: create /home/{{ hero }}/.gitconfig
     template: dest=/home/{{ hero }}/.gitconfig
               src=files/home/hero/.gitconfig
