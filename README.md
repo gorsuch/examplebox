@@ -109,11 +109,18 @@ vagrant@examplebox:~$
 
 ## Iterating
 
-You should make some changes to `provisioning/playbook.yml`.  Do that, and then update the box with:
+Read up on [Ansible](http://docs.ansible.com/index.html) and then make some changes to `provisioning/playbook.yml`.  Update the box with:
 
 ```
 $ vagrant provision
 ```
+
+And then ssh in to see how things have changed:
+
+```
+$ vagrant ssh
+```
+
 
 ## Starting over
 
