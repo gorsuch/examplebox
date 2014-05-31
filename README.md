@@ -107,6 +107,22 @@ vagrant@examplebox:~$
 
 ```
 
+If you'd like to become the dev user ('hiro' by default):
+
+```
+$ vagrant ssh
+...
+vagrant@examplebox:~$ sudo su - hiro
+hiro@examplebox:~$
+```
+
+Or, if you'd like to just skip the ceremony:
+
+```
+$ vagrant ssh -c "sudo su - hiro"
+hiro@examplebox:~$
+```
+
 ## Iterating
 
 Read up on [Ansible](http://docs.ansible.com/index.html) and then make some changes to `provisioning/playbook.yml`.  Update the box with:
