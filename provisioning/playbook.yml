@@ -3,9 +3,9 @@
   sudo: true
 
   vars:
-    hero: hiro
-    git_user: "Hiro Antagonist"
-    git_email: "hiro.antagonist@gmail.com"
+    user: hiro
+    git_user: "Hiro Protagonist"
+    git_email: "hiro.protagonist@gmail.com"
     go_tarball: "go1.2.1.linux-amd64.tar.gz"
     go_tarball_checksum: "d6e9623b8cf566599003dac6c402d03a62f48d98158bfcfc3b0c743b51ad4be6"
     go_version_target: "go version go1.2.1 linux/amd64"
@@ -18,14 +18,13 @@
     with_items:
       - build-essential
       - git
-      - libcurl4-openssl-dev
       - mercurial
       - vim
       - tmux
 
-  # our hero
-  - name: create {{ hero }}
-    user: name={{ hero }} 
+  # our user
+  - name: create {{ user }}
+    user: name={{ user }} 
           shell=/bin/bash 
           groups=sudo
 
@@ -48,38 +47,38 @@
           dest=/etc/profile.d/go-bin.sh
 
   # go path
-  - name: create /home/{{ hero }}/go
-    file: dest=/home/{{ hero }}/go
+  - name: create /home/{{ user }}/go
+    file: dest=/home/{{ user }}/go
           state=directory
-          owner={{ hero }}
-          group={{ hero }}
+          owner={{ user }}
+          group={{ user }}
 
   # godep
   - name: install godep
     shell: go get github.com/tools/godep
-           creates=/home/{{ hero }}/go/bin/godep
+           creates=/home/{{ user }}/go/bin/godep
     environment:
       PATH: /usr/local/bin:/usr/bin:/bin:/usr/local/go/bin
-      GOPATH: "/home/{{ hero }}/go"
+      GOPATH: "/home/{{ user }}/go"
     sudo: yes
-    sudo_user: "{{ hero }}"
+    sudo_user: "{{ user }}"
 
   # golint
   - name: install golint
     shell: go get github.com/golang/lint/golint
-           creates=/home/{{ hero }}/go/bin/golint
+           creates=/home/{{ user }}/go/bin/golint
     environment:
       PATH: /usr/local/bin:/usr/bin:/bin:/usr/local/go/bin
-      GOPATH: "/home/{{ hero }}/go"
+      GOPATH: "/home/{{ user }}/go"
     sudo: yes
-    sudo_user: "{{ hero }}"
+    sudo_user: "{{ user }}"
 
   # .profile
-  - name: create /home/{{ hero }}/.profile
-    template: dest=/home/{{ hero }}/.profile
-              src=files/home/hero/.profile
+  - name: create /home/{{ user }}/.profile
+    template: dest=/home/{{ user }}/.profile
+              src=files/home/user/.profile
 
   # .gitconfig
-  - name: create /home/{{ hero }}/.gitconfig
-    template: dest=/home/{{ hero }}/.gitconfig
-              src=files/home/hero/.gitconfig
+  - name: create /home/{{ user }}/.gitconfig
+    template: dest=/home/{{ user }}/.gitconfig
+              src=files/home/user/.gitconfig
