@@ -1,0 +1,31 @@
+---
+# our user
+- name: create {{ username }}
+  user: name={{ username }} 
+        shell=/bin/bash 
+        groups=sudo
+
+# godep
+- name: install godep
+  shell: go get github.com/tools/godep
+         creates=/home/{{ username }}/go/bin/godep
+  environment:
+    PATH: /usr/local/bin:/usr/bin:/bin:/usr/local/go/bin
+    GOPATH: "/home/{{ username }}/go"
+  sudo: yes
+  sudo_user: "{{ username }}"
+
+# golint
+- name: install golint
+  shell: go get github.com/golang/lint/golint
+         creates=/home/{{ username }}/go/bin/golint
+  environment:
+    PATH: /usr/local/bin:/usr/bin:/bin:/usr/local/go/bin
+    GOPATH: "/home/{{ username }}/go"
+  sudo: yes
+  sudo_user: "{{ username }}"
+
+# .gitconfig
+- name: create /home/{{ username }}/.gitconfig
+  template: dest=/home/{{ username }}/.gitconfig
+            src=home/user/.gitconfig

@@ -1,0 +1,9 @@
+---
+# basic packages
+- name: install packages
+  apt: pkg={{ item }}
+  with_items:
+    - build-essential
+    - git
+    - vim
+    - tmux
