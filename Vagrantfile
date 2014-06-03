@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = 'thoughtbot/ubuntu-14-04-server'
+  config.vm.box = 'ubuntu/trusty64'
   config.vm.hostname = 'examplebox'
 
   config.vm.provision 'ansible' do |ansible|
